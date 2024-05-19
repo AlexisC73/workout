@@ -6,6 +6,7 @@ import { InMemoryUserRepository } from "../infra/in-memory-user.repository"
 import { User } from "../model/user"
 import { getMeThunk } from "../usecases/get-me.usecase"
 import { signoutThunk } from "../usecases/signout.usecase"
+import { registerThunk } from "../usecases/register.usecase"
 
 export const createAuthFixture = () => {
   const userRepository = new InMemoryUserRepository()
@@ -36,9 +37,16 @@ export const createAuthFixture = () => {
     whenSignout: async () => {
       await store.dispatch(signoutThunk())
     },
+    whenUserRegister: async (user: User) => {
+      await store.dispatch(registerThunk(user))
+    },
     thenAuthStateShouldBe: (auth: AuthState) => {
       expect(store.getState().auth).toEqual(auth)
     },
+    thenAccountShouldExist: (expectedUser: User) => {
+      const fundUser = userRepository.users.find(u => u.id === expectedUser.id)
+      expect(fundUser).toEqual(expectedUser)
+    }
   }
 }
 

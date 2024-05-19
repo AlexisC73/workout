@@ -1,4 +1,4 @@
-import { CredentialError } from "../errors";
+import { AccountError, CredentialError } from "../errors";
 import { User } from "./user";
 import * as E from "fp-ts/Either";
 
@@ -6,4 +6,5 @@ export interface UserRepository {
   signin: (payload: {email: string, password: string}) => Promise<E.Either<CredentialError, Omit<User, "password">>>
   getMe: () => Promise<E.Either<CredentialError, Omit<User, "password">>>
   signout: () => Promise<E.Either<CredentialError, void>>
+  register: (payload: User) => Promise<E.Either<AccountError | CredentialError, void>>
 }

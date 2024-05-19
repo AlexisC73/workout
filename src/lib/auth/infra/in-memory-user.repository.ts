@@ -29,4 +29,15 @@ export class InMemoryUserRepository implements UserRepository {
     this.authenticatedUser = null
     return E.right(undefined)
   }
+
+  async register(payload: User) {
+    if(this.authenticatedUser) {
+      return E.left(new CredentialError("already authenticated"))
+    }
+    if(this.users.find(user => user.email === payload.email)) {
+      return E.left(new CredentialError("email already exists"))
+    }
+    this.users = [...this.users, payload]
+    return E.right(undefined)
+  }
 }
