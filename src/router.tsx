@@ -4,6 +4,10 @@ import HomePage from "./pages/HomePage"
 export const createRouter = () => {
   return createBrowserRouter([{
     path: "/",
-    element: <HomePage />
+    children: [{
+      path: "/",
+      index: true,
+      Component: HomePage
+    }]
   }])
 }
