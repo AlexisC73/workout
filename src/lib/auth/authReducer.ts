@@ -1,6 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { signinThunk } from "./usecases/signin.usecase";
 import { getMeThunk } from "./usecases/get-me.usecase";
+import { signoutThunk } from "./usecases/signout.usecase";
 
 export interface AuthState {
   user: { id: string, email: string } | null
@@ -29,5 +30,12 @@ export const authReducer = createReducer(authState, (builder) => {
   }).addCase(getMeThunk.rejected, (state) => {
     state.loading = false
     state.user = null
+  }).addCase(signoutThunk.fulfilled, (state) => {
+    state.user = null
+    state.loading = false
+  }).addCase(signoutThunk.pending, (state) => {
+    state.loading = true
+  }).addCase(signoutThunk.rejected, (state) => {
+    state.loading = false
   })
 })

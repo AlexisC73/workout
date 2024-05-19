@@ -21,4 +21,12 @@ export class InMemoryUserRepository implements UserRepository {
     }
     return E.right({ id: this.authenticatedUser.id, email: this.authenticatedUser.email })
   }
+
+  async signout() {
+    if(!this.authenticatedUser) {
+      return E.left(new CredentialError("unauthenticated"))
+    }
+    this.authenticatedUser = null
+    return E.right(undefined)
+  }
 }
