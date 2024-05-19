@@ -4,14 +4,16 @@ import { UserRepository } from "../model/user.repository";
 import * as E from "fp-ts/Either";
 
 export class InMemoryUserRepository implements UserRepository {
-  users: User[] = []
-  authenticatedUser: Omit<User, "password"> | null = null
+  users: User[] = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")!) : []
+  authenticatedUser: Omit<User, "password"> | null = localStorage.getItem("authenticatedUser") ? JSON.parse(localStorage.getItem("authenticatedUser")!) : null
 
   async signin(payload: {email: string, password: string}) {
     const user = this.users.find(user => user.email === payload.email && user.password === payload.password)
     if(!user) {
       return E.left(new CredentialError("invalid credentials"))
     }
+    this.authenticatedUser = {id: user.id, email: user.email}
+    localStorage.setItem("authenticatedUser", JSON.stringify(this.authenticatedUser))
     return E.right({ id: user.id, email: user.email })
   }
 
@@ -27,6 +29,7 @@ export class InMemoryUserRepository implements UserRepository {
       return E.left(new CredentialError("unauthenticated"))
     }
     this.authenticatedUser = null
+    localStorage.removeItem("authenticatedUser")
     return E.right(undefined)
   }
 
@@ -38,6 +41,7 @@ export class InMemoryUserRepository implements UserRepository {
       return E.left(new CredentialError("email already exists"))
     }
     this.users = [...this.users, payload]
+    localStorage.setItem("users", JSON.stringify(this.users))
     return E.right(undefined)
   }
 }
