@@ -1,10 +1,15 @@
-import { useAppDispatch } from "../../hooks/store";
+import { useAppDispatch, useAppSelector } from "../../lib/store-hook";
 import Layout from "../../layout";
 import { signinThunk } from "../../lib/auth/usecases/signin.usecase";
+import { getAuthUser } from "../../lib/auth/authReducer";
+import { Navigate, useLocation } from "react-router-dom";
 
 export default function LoginPage () {
 
   const dispatch = useAppDispatch()
+  const user = useAppSelector(getAuthUser)
+  const params = new URLSearchParams(useLocation().search)
+  const returnPath = params.get("path") || "/"
 
   const handleSignin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -14,11 +19,11 @@ export default function LoginPage () {
     dispatch(signinThunk({
       email: form.get("email") as string,
       password: form.get("password") as string,
-    })).then((result) => {
-      if(result.type === signinThunk.fulfilled.type) {
-        alert('Login success')
-      }
-    })
+    }))
+  }
+
+  if(user !== null) {
+    return <Navigate to={returnPath} />
   }
 
   return (

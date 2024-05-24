@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks/store";
+import { useAppDispatch, useAppSelector } from "../lib/store-hook";
 import { getAuthUser } from "../lib/auth/authReducer";
 import { signoutThunk } from "../lib/auth/usecases/signout.usecase";
 

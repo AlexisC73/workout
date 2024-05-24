@@ -1,5 +1,5 @@
 import Layout from "../layout";
-import { useAppSelector } from "../hooks/store";
+import { useAppSelector } from "../lib/store-hook";
 import { getAuthUser } from "../lib/auth/authReducer";
 
 export default function HomePage () {

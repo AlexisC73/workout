@@ -1,9 +1,12 @@
-import { useAppDispatch } from "../../hooks/store";
+import { useAppDispatch, useAppSelector } from "../../lib/store-hook";
 import Layout from "../../layout";
 import { registerThunk } from "../../lib/auth/usecases/register.usecase";
+import { getAuthUser } from "../../lib/auth/authReducer";
+import { Navigate } from "react-router-dom";
 
 export default function RegisterPage () {
   const dispatch = useAppDispatch()
+  const user = useAppSelector(getAuthUser)
 
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -20,6 +23,11 @@ export default function RegisterPage () {
       }
     })
   }
+
+  if(user !== null) {
+    return <Navigate to="/" />
+  }
+
   return (
     <Layout.WithHeader>
       <RegisterForm onSubmit={handleRegister} />

@@ -5,6 +5,7 @@ import { InMemoryUserRepository } from "./lib/auth/infra/in-memory-user.reposito
 import { getMeThunk } from "./lib/auth/usecases/get-me.usecase"
 import LoginPage from "./pages/auth/login"
 import RegisterPage from "./pages/auth/register"
+import { RequireAuth } from "./components/middleware/RequireAuth"
 
 const userRepository = new InMemoryUserRepository()
 export const store = createStore({userRepository}, {})
@@ -16,11 +17,11 @@ const getMeLoader = async () => {
 export const createRouter = () => {
   return createBrowserRouter([{
     path: "/",
+    loader: getMeLoader,
     children: [{
       path: "/",
       index: true,
-      Component: HomePage,
-      loader: getMeLoader
+      element: <RequireAuth page={<HomePage />} />,
     }, {
       path: "/auth",
       children: [{
@@ -30,6 +31,9 @@ export const createRouter = () => {
         path: "/auth/register",
         Component: RegisterPage
       }]
+    }, {
+      path: "/about",
+      element: <RequireAuth page={<div>About</div>} />,
     }]
   }])
 }
