@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { signinThunk } from "./usecases/signin.usecase";
 import { getMeThunk } from "./usecases/get-me.usecase";
 import { signoutThunk } from "./usecases/signout.usecase";
+import { RootState } from "../create-store";
 
 export interface AuthState {
   user: { id: string, email: string } | null
@@ -39,3 +40,5 @@ export const authReducer = createReducer(authState, (builder) => {
     state.loading = false
   })
 })
+
+export const getAuthUser = (state: RootState) => state.auth.user
