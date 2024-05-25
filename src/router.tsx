@@ -6,6 +6,7 @@ import { getMeThunk } from "@/lib/auth/usecases/get-me.usecase"
 import LoginPage from "./pages/auth/login"
 import RegisterPage from "@/pages/auth/register"
 import { RequireAuth } from "@/components/middleware/RequireAuth"
+import TrainingPage from "./pages/training/training"
 
 const userRepository = new InMemoryUserRepository()
 export const store = createStore({userRepository}, {})
@@ -21,7 +22,7 @@ export const createRouter = () => {
     children: [{
       path: "/",
       index: true,
-      element: <RequireAuth page={<HomePage />} />,
+      element: <HomePage />,
     }, {
       path: "/auth",
       children: [{
@@ -32,8 +33,8 @@ export const createRouter = () => {
         Component: RegisterPage
       }]
     }, {
-      path: "/about",
-      element: <RequireAuth page={<div>About</div>} />,
+      path: "/training",
+      element: <RequireAuth page={<TrainingPage />} />,
     }]
   }])
 }
