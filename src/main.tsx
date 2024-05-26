@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
+import "./index.css"
 import { RouterProvider } from 'react-router-dom'
 import { createRouter, store } from './router.tsx'
 import { Provider } from 'react-redux'
