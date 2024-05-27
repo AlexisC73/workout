@@ -8,18 +8,18 @@ describe("signin usecase", () => {
     authFixture = createAuthFixture()
   })
   
-  test("should sign in user", async () => {
-    authFixture.givenUsersExists([{ id: "1", email: "test@test.fr", password: "password"}])
+  test("should sign in account", async () => {
+    authFixture.givenAccountsExists([{ id: "1", email: "test@test.fr", password: "password"}])
 
-    await authFixture.whenUserSignIn({ email: "test@test.fr", password: "password" })
+    await authFixture.whenSignIn({ email: "test@test.fr", password: "password" })
 
     authFixture.thenAuthStateShouldBe({account: { id: "1", email: "test@test.fr" }, loading: false})
   })
 
-  test("if user does not exist should not sign in", async () => {
-    authFixture.givenNoUserExists()
+  test("if account does not exist should not sign in", async () => {
+    authFixture.givenNoAccountExists()
 
-    await authFixture.whenUserSignIn({ email: "test@test.fr", password: "password" })
+    await authFixture.whenSignIn({ email: "test@test.fr", password: "password" })
 
     authFixture.thenAuthStateShouldBe({account: null, loading: false})
   })

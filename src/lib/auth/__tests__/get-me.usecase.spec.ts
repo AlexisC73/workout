@@ -8,14 +8,14 @@ describe("get me usecase", () => {
     authFixture = createAuthFixture()
   })
 
-  test("should populate auth state if user authenticated", async () => {
-    authFixture.givenUsersExists([{
+  test("should populate auth state if authenticated", async () => {
+    authFixture.givenAccountsExists([{
       id: '1',
       email: "test@test.fr",
       password: "password"
     }])
 
-    authFixture.givenUserAuthenticatedAs({email: "test@test.fr"})
+    authFixture.givenAccountAuthenticatedAs({email: "test@test.fr"})
 
     await authFixture.whenGetMe()
 
@@ -28,8 +28,8 @@ describe("get me usecase", () => {
     })
   })
 
-  test("should not populate auth state if user not authenticated", async () => {
-    authFixture.givenUsersExists([{id: '1', email: "test@test.fr", password: "password"}])
+  test("should not populate auth state if not authenticated", async () => {
+    authFixture.givenAccountsExists([{id: '1', email: "test@test.fr", password: "password"}])
 
     await authFixture.whenGetMe()
 

@@ -8,10 +8,10 @@ describe("get me usecase", () => {
     authFixture = createAuthFixture()
   })
 
-  test("should populate auth state if user authenticated", async () => {
-    authFixture.givenNoUserExists()
+  test("should add account in account repository", async () => {
+    authFixture.givenNoAccountExists()
 
-    await authFixture.whenUserRegister({id: "1", email: "test@test.fr", password: "password"})
+    await authFixture.whenRegister({id: "1", email: "test@test.fr", password: "password"})
 
     authFixture.thenAccountShouldExist({
       id: "1",

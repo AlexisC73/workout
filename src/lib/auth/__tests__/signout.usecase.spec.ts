@@ -8,14 +8,14 @@ describe("get me usecase", () => {
     authFixture = createAuthFixture()
   })
 
-  test("state user null if user signout", async () => {
-    authFixture.givenUsersExists([{
+  test("state account null if signout", async () => {
+    authFixture.givenAccountsExists([{
       id: '1',
       email: "test@test.fr",
       password: "password"
     }])
 
-    authFixture.givenUserAlreadyAuthenticatedAs({id: '1', email: "test@test.fr"})
+    authFixture.givenAccountAlreadyAuthenticatedAs({id: '1', email: "test@test.fr"})
 
     await authFixture.whenSignout()
 

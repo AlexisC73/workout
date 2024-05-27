@@ -14,21 +14,21 @@ export const createAuthFixture = () => {
   let store = createStore({ accountRepository }, {})
 
   return {
-    givenUsersExists: (accounts: Account[]) => {
+    givenAccountsExists: (accounts: Account[]) => {
       accountRepository.accounts = accounts
     },
-    givenNoUserExists: () => {
+    givenNoAccountExists: () => {
       accountRepository.accounts = []
     },
-    givenUserAuthenticatedAs: (account: {email: string}) => {
-      const repoUser = accountRepository.accounts.find(a => a.email === account.email)!
-      accountRepository.authenticatedAccount = {email: repoUser.email, id: repoUser.id}
+    givenAccountAuthenticatedAs: (account: {email: string}) => {
+      const repoAccount = accountRepository.accounts.find(a => a.email === account.email)!
+      accountRepository.authenticatedAccount = {email: repoAccount.email, id: repoAccount.id}
     },
-    givenUserAlreadyAuthenticatedAs: (account: {id: string, email: string}) => {
+    givenAccountAlreadyAuthenticatedAs: (account: {id: string, email: string}) => {
       accountRepository.authenticatedAccount = {email: account.email, id: account.id}
       store = createStore({accountRepository}, {auth: {account: {id: account.id, email: account.email}, loading: false}})
     },
-    whenUserSignIn: async (credentials: {email: string, password: string}) => {
+    whenSignIn: async (credentials: {email: string, password: string}) => {
       await store.dispatch(signinThunk(credentials))
     },
     whenGetMe: async () => {
@@ -37,7 +37,7 @@ export const createAuthFixture = () => {
     whenSignout: async () => {
       await store.dispatch(signoutThunk())
     },
-    whenUserRegister: async (account: Account) => {
+    whenRegister: async (account: Account) => {
       await store.dispatch(registerThunk(account))
     },
     thenAuthStateShouldBe: (auth: AuthState) => {
