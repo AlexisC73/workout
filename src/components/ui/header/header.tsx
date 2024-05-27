@@ -1,17 +1,13 @@
 import { useState } from "react"
 import MenuButton from "../menu-button/menu-button"
 import { Link } from "react-router-dom"
-import { useAppSelector } from "@/lib/store-hook"
-import { getAuthUser } from "@/lib/auth/authReducer"
 
-const navLinks: {title: string, href: string, requireAuth: boolean}[] = [{
+const navLinks: {title: string, href: string}[] = [{
   title: "Home",
   href: "/",
-  requireAuth: false
 }, {
   title: "Training",
   href: "/training",
-  requireAuth: true
 }]
 
 export default function Header () {
@@ -29,11 +25,10 @@ export default function Header () {
 }
 
 function Menu ({menuOpen}: {menuOpen?: boolean}) {
-  const user = useAppSelector(getAuthUser)
   return (
     <div className={`top-13 bottom-0 left-0 right-0 fixed bg-white flex flex-col lg:static lg:flex-row ${menuOpen ? "" : "max-lg-hidden"}`}>
       <ul className="border-y-1 flex-1 lg:flex lg:border-transparent lg:gap-x-4">
-        {navLinks.filter(item => item.requireAuth ? user ? true : false : true).map(({title, href}) => <MenuItem key={title} text={title} href={href} />)}
+        {navLinks.map(({title, href}) => <MenuItem key={title} text={title} href={href} />)}
       </ul>
     </div>
   )
