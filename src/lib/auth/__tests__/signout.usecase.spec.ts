@@ -20,7 +20,7 @@ describe("get me usecase", () => {
     await authFixture.whenSignout()
 
     authFixture.thenAuthStateShouldBe({
-      user: null,
+      account: null,
       loading: false
     })
   })

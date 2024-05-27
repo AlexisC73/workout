@@ -13,7 +13,7 @@ describe("signin usecase", () => {
 
     await authFixture.whenUserSignIn({ email: "test@test.fr", password: "password" })
 
-    authFixture.thenAuthStateShouldBe({user: { id: "1", email: "test@test.fr" }, loading: false})
+    authFixture.thenAuthStateShouldBe({account: { id: "1", email: "test@test.fr" }, loading: false})
   })
 
   test("if user does not exist should not sign in", async () => {
@@ -21,6 +21,6 @@ describe("signin usecase", () => {
 
     await authFixture.whenUserSignIn({ email: "test@test.fr", password: "password" })
 
-    authFixture.thenAuthStateShouldBe({user: null, loading: false})
+    authFixture.thenAuthStateShouldBe({account: null, loading: false})
   })
 })

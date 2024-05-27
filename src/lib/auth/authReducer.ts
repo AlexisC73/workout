@@ -5,34 +5,34 @@ import { signoutThunk } from "./usecases/signout.usecase";
 import { RootState } from "../create-store";
 
 export interface AuthState {
-  user: { id: string, email: string } | null
+  account: { id: string, email: string } | null
   loading: boolean
 }
 
 const authState: AuthState = {
-  user: null,
+  account: null,
   loading: false
 }
 
 export const authReducer = createReducer(authState, (builder) => {
   builder.addCase(signinThunk.fulfilled, (state, action) => {
-    state.user = {email: action.payload.email, id: action.payload.id}
+    state.account = {email: action.payload.email, id: action.payload.id}
     state.loading = false
   }).addCase(signinThunk.pending, (state) => {
     state.loading = true
   }).addCase(signinThunk.rejected, (state) => {
     state.loading = false
-    state.user = null
+    state.account = null
   }).addCase(getMeThunk.fulfilled, (state, action) => {
-    state.user = {email: action.payload.email, id: action.payload.id}
+    state.account = {email: action.payload.email, id: action.payload.id}
     state.loading = false
   }).addCase(getMeThunk.pending, (state) => {
     state.loading = true
   }).addCase(getMeThunk.rejected, (state) => {
     state.loading = false
-    state.user = null
+    state.account = null
   }).addCase(signoutThunk.fulfilled, (state) => {
-    state.user = null
+    state.account = null
     state.loading = false
   }).addCase(signoutThunk.pending, (state) => {
     state.loading = true
@@ -41,4 +41,4 @@ export const authReducer = createReducer(authState, (builder) => {
   })
 })
 
-export const getAuthUser = (state: RootState) => state.auth.user
+export const getAuthUser = (state: RootState) => state.auth.account

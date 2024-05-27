@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom"
 import HomePage from "@/pages/HomePage"
 import { createStore } from "@/lib/create-store"
-import { InMemoryUserRepository } from "@/lib/auth/infra/in-memory-user.repository"
+import { InMemoryAccountRepository } from "@/lib/auth/infra/in-memory-account.repository"
 import { getMeThunk } from "@/lib/auth/usecases/get-me.usecase"
 import LoginPage from "./pages/auth/login"
 import RegisterPage from "@/pages/auth/register"
 import { RequireAuth } from "@/components/middleware/RequireAuth"
 import TrainingPage from "./pages/training/training"
 
-const userRepository = new InMemoryUserRepository()
-export const store = createStore({userRepository}, {})
+const accountRepository = new InMemoryAccountRepository()
+export const store = createStore({accountRepository}, {})
 
 const getMeLoader = async () => {
   return store.dispatch(getMeThunk())

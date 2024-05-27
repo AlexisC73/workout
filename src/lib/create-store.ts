@@ -1,9 +1,9 @@
 import { Action, configureStore, ThunkDispatch } from "@reduxjs/toolkit"
 import { rootReducer } from "./root-reducer"
-import { UserRepository } from "./auth/model/user.repository"
+import { AccountRepository } from "./auth/model/account.repository"
 
 export interface Dependencies {
-  userRepository: UserRepository
+  accountRepository: AccountRepository
 }
 
 export const createStore = (dependencies: Dependencies, preloadedState: Partial<RootState>) => {

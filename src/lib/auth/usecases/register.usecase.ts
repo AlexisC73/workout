@@ -1,12 +1,12 @@
 import { createAppAsyncThunk } from "../../create-app-thunk";
-import { User } from "../model/user";
+import { Account } from "../model/account";
 
-export const registerThunk = createAppAsyncThunk("auth/register", async (payload: RegisterPayload, {extra: { userRepository }}) => {
-  const signedUser = await userRepository.register(payload)
-  if(signedUser._tag === "Left") {
-    throw signedUser.left
+export const registerThunk = createAppAsyncThunk("auth/register", async (payload: RegisterPayload, {extra: { accountRepository }}) => {
+  const signedAccount = await accountRepository.register(payload)
+  if(signedAccount._tag === "Left") {
+    throw signedAccount.left
   }
-  return signedUser.right
+  return signedAccount.right
 })
 
-export type RegisterPayload = User
+export type RegisterPayload = Account

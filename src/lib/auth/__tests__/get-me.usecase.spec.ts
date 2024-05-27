@@ -20,7 +20,7 @@ describe("get me usecase", () => {
     await authFixture.whenGetMe()
 
     authFixture.thenAuthStateShouldBe({
-      user: {
+      account: {
         id: '1',
         email: "test@test.fr",
       },
@@ -34,7 +34,7 @@ describe("get me usecase", () => {
     await authFixture.whenGetMe()
 
     authFixture.thenAuthStateShouldBe({
-      user: null,
+      account: null,
       loading: false
     })
   })
