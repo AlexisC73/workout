@@ -1,5 +1,6 @@
 import {describe, test, beforeEach} from "vitest"
 import { AuthFixture, createAuthFixture } from "./authFixture"
+import { accountBuilder } from "./accountBuilder"
 
 describe("signin usecase", () => {
   let authFixture: AuthFixture
@@ -9,7 +10,9 @@ describe("signin usecase", () => {
   })
   
   test("should sign in account", async () => {
-    authFixture.givenAccountsExists([{ id: "1", email: "test@test.fr", password: "password"}])
+    const existingAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").build()
+
+    authFixture.givenAccountsExists([existingAccount])
 
     await authFixture.whenSignIn({ email: "test@test.fr", password: "password" })
 
