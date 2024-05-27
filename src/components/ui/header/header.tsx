@@ -66,7 +66,7 @@ function AuthHeader() {
 
   if(!auth) {
     return (
-      <>
+      <div className="lg:hidden py-2">
         <form className="p-5 flex flex-col gap-y-4" onSubmit={handleSignIn}>
           <div className="flex flex-col">
             <label className="text-3.5" htmlFor="email">Email</label>
@@ -80,7 +80,7 @@ function AuthHeader() {
           <button type="submit" className="h-12 bg-blue-1 rounded-2 text-blue-9 font-medium">Me connecter</button>
         </form>
         <p className="px-4 text-gray-7 py-2">Je n'ai pas de compte ? <Link to="/auth/register" className="text-blue-7 underline">M'inscrire</Link></p>
-      </>
+      </div>
       
     )
   }
