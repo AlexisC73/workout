@@ -3,6 +3,7 @@ import { registerThunk } from "../../lib/auth/usecases/register.usecase";
 import { getAuthUser } from "../../lib/auth/authReducer";
 import { Link, Navigate } from "react-router-dom";
 import Input from "@/components/ui/form/input/input";
+import Button from "@/components/ui/button/button";
 
 export default function RegisterPage () {
   const dispatch = useAppDispatch()
@@ -44,7 +45,7 @@ export default function RegisterPage () {
             <Input name="password" type="password" />
           </div>
         </div>
-        <button type="submit" className="bg-blue-6 p-4 text-white rounded-2 mt-10 font-medium">Créer mon compte</button>
+        <Button type="submit">Créer mon compte</Button>
         <p className="mt-4">J'ai déjà un compte ? <Link to="/auth/login" className="text-blue-6 rounded-2 font-medium">Me connecter</Link></p>
       </form>
       <img src="https://placehold.co/1200x1500" alt="login" className="hidden lg:block w-full object-cover" />

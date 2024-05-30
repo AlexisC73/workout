@@ -3,6 +3,7 @@ import { signinThunk } from "../../lib/auth/usecases/signin.usecase";
 import { getAuthUser } from "../../lib/auth/authReducer";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import Input from "@/components/ui/form/input/input";
+import Button from "@/components/ui/button/button";
 
 export default function LoginPage () {
 
@@ -43,7 +44,7 @@ export default function LoginPage () {
             <Link to="/auth/forgot-password" className="text-blue-6 rounded-2 font-medium self-end mt-1">Mot de passe oublié ?</Link>
           </div>
         </div>
-        <button type="submit" className="bg-blue-6 p-4 text-white rounded-2 mt-10 font-medium">Me connecter</button>
+        <Button type="submit">Me Connecter</Button>
         <p className="mt-4">Je n'ai pas de compte ? <Link to="/auth/register" className="text-blue-6 rounded-2 font-medium">Créer mon compte</Link></p>
       </form>
       <img src="https://placehold.co/1200x1500" alt="login" className="hidden lg:block w-full object-cover lg:max-h-screen" />
