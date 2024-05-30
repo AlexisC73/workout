@@ -35,7 +35,7 @@ export default function RegisterPage () {
         <div>
           <h2 className="text-10 max-w-60 font-bold mb-10">Créez vous un compte</h2>
         </div>
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-4 mb-10">
           <div className="flex flex-col gap-y-1">
             <label htmlFor="email">Email</label>
             <Input name="email" type="email" />
