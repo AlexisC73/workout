@@ -7,6 +7,7 @@ import LoginPage from "./pages/auth/login"
 import RegisterPage from "@/pages/auth/register"
 import { RequireAuth } from "@/components/middleware/RequireAuth"
 import TrainingPage from "./pages/training/training"
+import ForgotPasswordPage from "./pages/auth/forgot-password"
 
 const accountRepository = new InMemoryAccountRepository()
 export const store = createStore({accountRepository}, {})
@@ -31,6 +32,9 @@ export const createRouter = () => {
       }, {
         path: "/auth/register",
         Component: RegisterPage
+      }, {
+        path: "/auth/forgot-password",
+        Component: ForgotPasswordPage
       }]
     }, {
       path: "/training",
