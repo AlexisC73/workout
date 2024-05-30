@@ -62,7 +62,7 @@ function AuthHeader() {
   }
   
   return (
-    <div className="flex w-full flex-col py-5 px-6 gap-y-1">
+    <div className="flex w-full flex-col py-5 px-6 gap-y-1 lg:hidden">
       <p>Profile</p>
       <div className="flex items-center gap-x-4 py-4">
         <img src="https://placehold.co/75x75" className="rounded-full" alt="Profile picture" />
