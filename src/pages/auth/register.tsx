@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../lib/store-hook";
-import Layout from "../../layout";
 import { registerThunk } from "../../lib/auth/usecases/register.usecase";
 import { getAuthUser } from "../../lib/auth/authReducer";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import Input from "@/components/ui/form/input/input";
 
 export default function RegisterPage () {
   const dispatch = useAppDispatch()
@@ -29,16 +29,25 @@ export default function RegisterPage () {
   }
 
   return (
-    <Layout.WithHeader>
-      <RegisterForm onSubmit={handleRegister} />
-    </Layout.WithHeader>
+    <div className="flex w-full overflow-hidden h-screen">
+      <form className="flex flex-col w-full mt-8 p-10 lg:px-20 lg:min-w-150 lg:w-150" onSubmit={handleRegister}>
+        <div>
+          <h2 className="text-10 max-w-60 font-bold mb-10">Créez vous un compte</h2>
+        </div>
+        <div className="flex flex-col gap-y-4">
+          <div className="flex flex-col gap-y-1">
+            <label htmlFor="email">Email</label>
+            <Input name="email" type="email" />
+          </div>
+          <div className="flex flex-col gap-y-1">
+            <label htmlFor="password">Mot de passe</label>
+            <Input name="password" type="password" />
+          </div>
+        </div>
+        <button type="submit" className="bg-blue-6 p-4 text-white rounded-2 mt-10 font-medium">Créer mon compte</button>
+        <p className="mt-4">J'ai déjà un compte ? <Link to="/auth/login" className="text-blue-6 rounded-2 font-medium">Me connecter</Link></p>
+      </form>
+      <img src="https://placehold.co/1200x1500" alt="login" className="hidden lg:block w-full object-cover" />
+    </div>
   )
-}
-
-function RegisterForm ({ onSubmit }: {onSubmit: (e: React.FormEvent<HTMLFormElement>) => void}) {
-  return <form onSubmit={onSubmit}>
-    <input type="email" name="email" id="email" placeholder="Username" />
-    <input type="password" name="password" id="password" placeholder="Password" />
-    <button type="submit">Register</button>
-  </form>
 }
