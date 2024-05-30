@@ -5,7 +5,7 @@ import * as E from "fp-ts/Either";
 
 export class InMemoryAccountRepository implements AccountRepository {
   accounts: Account[] = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")!) : []
-  authenticatedAccount: Omit<Account, "password"> | null = localStorage.getItem("authenticatedAccount") ? JSON.parse(localStorage.getItem("authenticatedUser")!) : null
+  authenticatedAccount: Omit<Account, "password"> | null = localStorage.getItem("authenticatedAccount") ? JSON.parse(localStorage.getItem("authenticatedAccount")!) : null
 
   async signin(payload: {email: string, password: string}) {
     const account = this.accounts.find(a => a.email === payload.email && a.password === payload.password)
