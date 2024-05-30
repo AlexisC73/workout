@@ -63,7 +63,9 @@ function AuthHeader() {
           <LinkButton href="/auth/login">Me connecter</LinkButton>
           <LinkButton href="/auth/register" style="secondary">M'inscrire</LinkButton>
         </div>
-        <p className="hidden lg:block"><Link to="/auth/login" className="hover:text-blue-6 hover:underline">Me connecter</Link> / <Link to="/auth/register" className="hover:text-blue-6 hover:underline">M'inscrire</Link></p>
+        <div className="flex items-center">
+          <p className="hidden lg:block text-3.25"><Link to="/auth/login" className="hover:text-blue-6 hover:underline">Me connecter</Link> / <Link to="/auth/register" className="hover:text-blue-6 hover:underline">M'inscrire</Link></p>
+        </div>
       </>
       
     )
