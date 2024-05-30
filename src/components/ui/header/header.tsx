@@ -31,7 +31,7 @@ export default function Header () {
 
 function Menu ({menuOpen}: {menuOpen?: boolean}) {
   return (
-    <div className={`top-13 bottom-0 left-0 right-0 absolute bg-white flex flex-col lg:static lg:flex-row ${menuOpen ? "" : "max-lg-hidden"}`}>
+    <div className={`top-13 bottom-0 left-0 right-0 absolute bg-white flex flex-col lg:static lg:flex-row lg:justify-between lg:w-full ${menuOpen ? "" : "max-lg-hidden"}`}>
       <ul className="border-y-1 flex-1 lg:flex lg:border-transparent lg:gap-x-4">
         {navLinks.map(({title, href}) => <MenuItem key={title} text={title} href={href} />)}
       </ul>
@@ -56,10 +56,14 @@ function AuthHeader() {
 
   if(!auth) {
     return (
-      <div className="lg:hidden px-8 py-4 flex flex-col gap-y-4">
-        <LinkButton href="/auth/login">Me connecter</LinkButton>
-        <LinkButton href="/auth/register" style="secondary">M'inscrire</LinkButton>
-      </div>
+      <>
+        <div className="lg:hidden px-8 py-4 flex flex-col gap-y-4">
+          <LinkButton href="/auth/login">Me connecter</LinkButton>
+          <LinkButton href="/auth/register" style="secondary">M'inscrire</LinkButton>
+        </div>
+        <p className="hidden lg:block"><Link to="/auth/login" className="hover:text-blue-6 hover:underline">Me connecter</Link> / <Link to="/auth/register" className="hover:text-blue-6 hover:underline">M'inscrire</Link></p>
+      </>
+      
     )
   }
   
