@@ -20,11 +20,13 @@ export default function Header () {
   const toggleMenu = () => setMenuOpen(!menuOpen)
 
   return (
-    <header className="flex w-full h-13 items-center px-12.5 shadow justify-end lg:justify-between">
-      <div className="lg:hidden">
-        <MenuButton onClickAction={toggleMenu} />
+    <header className="flex w-full h-13 items-center shadow justify-end lg:justify-between">
+      <div className="flex max-w-245 mx-auto items-center px-12.5 w-full justify-end lg:justify-between">
+        <div className="lg:hidden">
+          <MenuButton onClickAction={toggleMenu} />
+        </div>
+        <Menu menuOpen={menuOpen} />
       </div>
-      <Menu menuOpen={menuOpen} />
     </header>
   )
 }
