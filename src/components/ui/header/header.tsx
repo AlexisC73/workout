@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@/lib/store-hook"
 import { getAuthUser } from "@/lib/auth/authReducer"
 import { signoutThunk } from "@/lib/auth/usecases/signout.usecase"
-import SigninForm from "../form/signin-form"
+import Button from "../button/button"
+import LinkButton from "../button/link-button"
 
 const navLinks: {title: string, href: string}[] = [{
   title: "Home",
@@ -55,8 +56,9 @@ function AuthHeader() {
 
   if(!auth) {
     return (
-      <div className="lg:hidden">
-        <SigninForm />
+      <div className="lg:hidden px-8 py-4 flex flex-col gap-y-4">
+        <LinkButton href="/auth/login">Me connecter</LinkButton>
+        <LinkButton href="/auth/register" style="secondary">M'inscrire</LinkButton>
       </div>
     )
   }
@@ -68,7 +70,7 @@ function AuthHeader() {
         <img src="https://placehold.co/75x75" className="rounded-full" alt="Profile picture" />
         <p>{auth?.email}</p>
       </div>
-      <button onClick={handleLogout} className="h-12 bg-blue-1 rounded-2 text-blue-9 font-medium">Logout</button>
+      <Button type="button" onCickAction={handleLogout}>Me déconnecter</Button>
     </div>
   )
 }
