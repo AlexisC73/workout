@@ -31,7 +31,7 @@ export default function ForgotPasswordPage () {
           </div>
           <Button type="submit">Réinitialiser mon mot de passe</Button>
         </form>
-        <p className="mt-4">Vous vous souvenez de votre mot de passe ? <Link to="/auth/register" className="text-blue-6 rounded-2 font-medium">Me connecter</Link></p>
+        <p className="mt-4">Vous vous souvenez de votre mot de passe ? <Link to="/auth/login" className="text-blue-6 rounded-2 font-medium">Me connecter</Link></p>
       </div>
       
       <img src="https://placehold.co/1200x1500" alt="login" className="hidden lg:block w-full object-cover lg:max-h-screen" />
