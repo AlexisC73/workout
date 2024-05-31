@@ -29,8 +29,8 @@ export default function HeaderProfile() {
         <Button type="button" onCickAction={handleLogout}>Me déconnecter</Button>
       </div>
       <div onClick={toggleMenu} className="hidden lg:block relative">
-        <div className="h-10 w-10 cursor-pointer">
-          <img src="https://placehold.co/75x75" className="rounded-full" alt="Profile picture" />
+        <div className="h-10 w-10 cursor-pointer  rounded-full">
+          <img src="https://placehold.co/75x75" className="rounded-full border-2 border-blue-6 hover:border-blue-3" alt="Profile picture" />
         </div>
         {menuOpen && (
           <div className="absolute top-11 flex flex-col shadow right-0 bg-white border p-2 w-60 rounded-1">
