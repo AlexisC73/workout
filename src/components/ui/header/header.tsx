@@ -20,7 +20,7 @@ export default function Header () {
 
   return (
     <header className="flex w-full h-13 items-center shadow justify-end lg:justify-between">
-      <div className="flex max-w-245 mx-auto items-center px-12.5 w-full justify-end lg:justify-between">
+      <div className="flex max-w-245 mx-auto items-center px-8 lg:px-0 w-full justify-end lg:justify-between">
         <div className="lg:hidden">
           <MenuButton onClickAction={toggleMenu} />
         </div>
