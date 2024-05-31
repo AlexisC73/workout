@@ -1,11 +1,10 @@
 import { useState } from "react"
 import MenuButton from "../menu-button/menu-button"
 import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "@/lib/store-hook"
+import { useAppSelector } from "@/lib/store-hook"
 import { getAuthUser } from "@/lib/auth/authReducer"
-import { signoutThunk } from "@/lib/auth/usecases/signout.usecase"
-import Button from "../button/button"
 import LinkButton from "../button/link-button"
+import HeaderProfile from "./header-profile/header-profile"
 
 const navLinks: {title: string, href: string}[] = [{
   title: "Home",
@@ -49,12 +48,7 @@ function MenuItem ({text, href}: {text: string, href: string}) {
 }
 
 function AuthHeader() {
-  const dispatch = useAppDispatch()
   const auth = useAppSelector(getAuthUser)
-  
-  const handleLogout = () => {
-    dispatch(signoutThunk())
-  }
 
   if(!auth) {
     return (
@@ -67,18 +61,8 @@ function AuthHeader() {
           <p className="hidden lg:block text-3.25"><Link to="/auth/login" className="hover:text-blue-6 hover:underline">Me connecter</Link> / <Link to="/auth/register" className="hover:text-blue-6 hover:underline">M'inscrire</Link></p>
         </div>
       </>
-      
     )
   }
   
-  return (
-    <div className="flex w-full flex-col py-5 px-6 gap-y-1 lg:hidden">
-      <p>Profile</p>
-      <div className="flex items-center gap-x-4 py-4">
-        <img src="https://placehold.co/75x75" className="rounded-full" alt="Profile picture" />
-        <p>{auth?.email}</p>
-      </div>
-      <Button type="button" onCickAction={handleLogout}>Me déconnecter</Button>
-    </div>
-  )
+  return <HeaderProfile />
 }
