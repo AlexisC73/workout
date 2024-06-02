@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { AccountIcon, SettingIcon } from "@/assets/icons";
 import LogoutButton from "../../button/auth/logout-button";
 import Separator from "../../separator/separator";
+import Avatar from "../../account/avatar";
 
 export default function HeaderProfile() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -24,14 +25,19 @@ export default function HeaderProfile() {
       <div className="flex w-full flex-col py-5 px-6 gap-y-1 lg:hidden">
         <p>Profile</p>
         <div className="flex items-center gap-x-4 py-4">
-          <img src="https://placehold.co/75x75" className="rounded-full" alt="Profile picture" />
+          <div className="w-20">
+            <Avatar />
+          </div>
+          
           <p>{auth?.email}</p>
         </div>
         <Button type="button" onCickAction={handleLogout}>Me déconnecter</Button>
       </div>
       <div onClick={toggleMenu} className="hidden lg:block relative">
         <div className="h-10 w-10 cursor-pointer  rounded-full">
-          <img src="https://placehold.co/75x75" className="rounded-full border-2 border-blue-6 hover:border-blue-3" alt="Profile picture" />
+          <div className="rounded-full border-2 border-blue-6 hover:border-blue-3">
+            <Avatar />
+          </div>
         </div>
         {menuOpen && (
           <div className="absolute top-11 flex flex-col shadow right-0 bg-white border p-2 w-60 rounded-1">

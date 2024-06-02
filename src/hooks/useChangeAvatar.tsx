@@ -2,7 +2,7 @@ import { MutableRefObject, useCallback, useEffect, useState } from "react"
 
 export default function useChangeAvatar({el}: {el: MutableRefObject<HTMLInputElement | null>}) {
 
-  const [avatar, setAvatar] = useState<string | null>(null)
+  const [inputFile, setInputFile] = useState<string | null>(null)
 
   const changeAvatar = () => {
     if(!el.current) return
@@ -13,13 +13,13 @@ export default function useChangeAvatar({el}: {el: MutableRefObject<HTMLInputEle
     if(!el.current?.files) return
     const reader = new FileReader()
     reader.onload = () => {
-      setAvatar(reader.result as string)
+      setInputFile(reader.result as string)
     }
     reader.readAsDataURL(el.current.files[0])
   }, [el])
 
   const onCropCompleted = (cb: (avatarUrl: string) => void) => (imageUrl: string) => {
-    setAvatar(null)
+    setInputFile(null)
     cb(imageUrl)
   }
 
@@ -32,5 +32,5 @@ export default function useChangeAvatar({el}: {el: MutableRefObject<HTMLInputEle
     }
   }, [el, handleFileChange])
 
-  return {avatar, changeAvatar, onCropCompleted}
+  return {inputFile, changeAvatar, onCropCompleted}
 }

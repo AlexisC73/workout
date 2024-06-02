@@ -3,27 +3,29 @@ import Input from "@/components/ui/form/input/input";
 import Label from "@/components/ui/form/label/label";
 import Separator from "@/components/ui/separator/separator";
 import Layout from "@/layout";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import ImageCropper from "../../components/ui/crop/crop";
 import useChangeAvatar from "@/hooks/useChangeAvatar";
+import Avatar from "@/components/ui/account/avatar";
 
 export default function ProfilePage () {
   const avatarInputRef = useRef<HTMLInputElement | null>(null)
-  const {avatar, changeAvatar, onCropCompleted} = useChangeAvatar({el: avatarInputRef})
-  const [cropedImage, setCroppedImage] = useState<string | null>(null)
+  const {inputFile, changeAvatar, onCropCompleted} = useChangeAvatar({el: avatarInputRef})
 
   const handleCropCompleted = onCropCompleted((avatarUrl: string) => {
-      setCroppedImage(avatarUrl)
+      console.log(avatarUrl)
     })
 
   return (
     <Layout.WithHeader>
-      {avatar && <ImageCropper expectSize={{width: 200, height: 200}} onCropCompleted={handleCropCompleted} imageSource={avatar} />}
+      {inputFile && <ImageCropper expectSize={{width: 200, height: 200}} onCropCompleted={handleCropCompleted} imageSource={inputFile} />}
       <div className="max-w-245 mx-auto w-full flex flex-col pb-10">
         <section id="profile-picture" className="p-8 flex flex-col items-center gap-y-10">
           <input ref={avatarInputRef} type="file" className="hidden" id="avatar" accept="image/*" />
           <h2 className="self-start font-bold text-6">Avatar</h2>
-          <img src={cropedImage || "https://placehold.co/75x75"} className="rounded-full w-25 h-25" />
+          <div className="w-30">
+            <Avatar />
+          </div>
           <div className="flex flex-col gap-y-5 w-full lg:flex-row lg:gap-x-5">
             <Button onCickAction={changeAvatar}>Modifier mon avatar</Button>
             <Button style="secondary">Supprimer mon avatar</Button>
