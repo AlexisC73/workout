@@ -36,7 +36,7 @@ export default function HeaderProfile() {
         {menuOpen && (
           <div className="absolute top-11 flex flex-col shadow right-0 bg-white border p-2 w-60 rounded-1">
             <ul className="flex flex-col gap-y-2 pb-2">
-              <MenuItem to="/profile">
+              <MenuItem to="/account/profile">
                 <AccountIcon className="text-5" />
                 <span>Mon compte</span>
               </MenuItem>
