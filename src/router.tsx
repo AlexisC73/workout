@@ -9,6 +9,7 @@ import { RequireAuth } from "@/components/middleware/RequireAuth"
 import TrainingPage from "./pages/training/training"
 import ForgotPasswordPage from "./pages/auth/forgot-password"
 import TrainingSessionPage from "./pages/training/training-session/training-session"
+import ProfilePage from "./pages/account/profile"
 
 const accountRepository = new InMemoryAccountRepository()
 export const store = createStore({accountRepository}, {})
@@ -47,6 +48,12 @@ export const createRouter = () => {
       {
         path: "/training/:id",
         element: <RequireAuth page={<TrainingSessionPage />} />
+      }]
+    }, {
+      path: "/account",
+      children: [{
+        path: "/account/profile",
+        element: <RequireAuth page={<ProfilePage />} />
       }]
     }]
   }])
