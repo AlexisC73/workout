@@ -1,6 +1,6 @@
 import { CredentialError } from "../errors";
-import { Account } from "../model/account";
-import { AccountRepository, RegisterPayload } from "../model/account.repository";
+import { Account } from "../../account/model/account";
+import { AccountRepository, RegisterPayload } from "../../account/model/account.repository";
 import * as E from "fp-ts/Either";
 
 export class InMemoryAccountRepository implements AccountRepository {

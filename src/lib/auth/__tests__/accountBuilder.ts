@@ -1,4 +1,4 @@
-import { Account } from "../model/account";
+import { Account } from "../../account/model/account";
 
 export const accountBuilder = ({id = "1", email = "test@test.fr", password = "test-pass", avatarUrl = null}: Partial<Account> = {}) => {
   const props = {id, email, password, avatarUrl}

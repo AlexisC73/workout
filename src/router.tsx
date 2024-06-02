@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import HomePage from "@/pages/HomePage"
 import { createStore } from "@/lib/create-store"
-import { InMemoryAccountRepository } from "@/lib/auth/infra/in-memory-account.repository"
+import { InMemoryAccountRepository } from "@/lib/account/infra/in-memory-account.repository"
 import { getMeThunk } from "@/lib/auth/usecases/get-me.usecase"
 import LoginPage from "./pages/auth/login"
 import RegisterPage from "@/pages/auth/register"

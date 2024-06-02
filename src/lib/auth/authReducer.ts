@@ -3,7 +3,7 @@ import { signinThunk } from "./usecases/signin.usecase";
 import { getMeThunk } from "./usecases/get-me.usecase";
 import { signoutThunk } from "./usecases/signout.usecase";
 import { RootState } from "../create-store";
-import { Account } from "./model/account";
+import { Account } from "../account/model/account";
 
 export interface AuthState {
   account: Omit<Account, "password"> | null
