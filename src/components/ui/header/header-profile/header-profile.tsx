@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AccountIcon, SettingIcon } from "@/assets/icons";
 import LogoutButton from "../../button/auth/logout-button";
+import Separator from "../../separator/separator";
 
 export default function HeaderProfile() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -53,10 +54,6 @@ export default function HeaderProfile() {
       </div>
     </>
   )
-}
-
-function Separator () {
-  return <div className="h-0.5 bg-gray-1 w-full"></div>
 }
 
 function MenuItem ({children, to}: {children?: React.ReactNode, to: string}) {
