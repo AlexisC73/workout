@@ -7,13 +7,17 @@ import { useRef } from "react";
 import ImageCropper from "../../components/ui/crop/crop";
 import useChangeAvatar from "@/hooks/useChangeAvatar";
 import Avatar from "@/components/ui/account/avatar";
+import { useAppDispatch } from "@/lib/store-hook";
+import { updateAvatarThunk } from "@/lib/account/usecases/update-avatar.usecase";
 
 export default function ProfilePage () {
+  const dispatch = useAppDispatch()
   const avatarInputRef = useRef<HTMLInputElement | null>(null)
   const {inputFile, changeAvatar, onCropCompleted} = useChangeAvatar({el: avatarInputRef})
 
+
   const handleCropCompleted = onCropCompleted((avatarUrl: string) => {
-      console.log(avatarUrl)
+      dispatch(updateAvatarThunk({ avatar: avatarUrl }))
     })
 
   return (

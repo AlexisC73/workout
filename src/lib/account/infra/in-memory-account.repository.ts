@@ -44,4 +44,8 @@ export class InMemoryAccountRepository implements AccountRepository {
     localStorage.setItem("users", JSON.stringify(this.accounts))
     return E.right(undefined)
   }
+
+  async updateAvatatar(params: {newLink: string}): Promise<void> {
+    this.accounts = this.accounts.map(account => account.id === this.authenticatedAccount?.id ? {...account, avatarUrl: params.newLink} : account)
+  }
 }

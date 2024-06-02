@@ -10,9 +10,11 @@ import TrainingPage from "./pages/training/training"
 import ForgotPasswordPage from "./pages/auth/forgot-password"
 import TrainingSessionPage from "./pages/training/training-session/training-session"
 import ProfilePage from "./pages/account/profile"
+import { InMemoryAvatarRepository } from "./lib/account/infra/in-memory-avatar.repository"
 
 const accountRepository = new InMemoryAccountRepository()
-export const store = createStore({accountRepository}, {})
+const avatarRepository = new InMemoryAvatarRepository()
+export const store = createStore({accountRepository, avatarRepository}, {})
 
 const getMeLoader = async () => {
   return store.dispatch(getMeThunk())

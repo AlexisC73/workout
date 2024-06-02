@@ -7,6 +7,7 @@ export interface AccountRepository {
   getMe: () => Promise<E.Either<CredentialError, Omit<Account, "password">>>
   signout: () => Promise<E.Either<CredentialError, void>>
   register: (payload: RegisterPayload) => Promise<E.Either<AccountError | CredentialError, void>>
+  updateAvatatar({newLink}: {newLink: string}): Promise<void>
 }
 
 export type RegisterPayload = {id: string, email: string, password: string}

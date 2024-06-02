@@ -4,6 +4,7 @@ import { getMeThunk } from "./usecases/get-me.usecase";
 import { signoutThunk } from "./usecases/signout.usecase";
 import { RootState } from "../create-store";
 import { Account } from "../account/model/account";
+import { updateAvatarThunk } from "../account/usecases/update-avatar.usecase";
 
 export interface AuthState {
   account: Omit<Account, "password"> | null
@@ -39,6 +40,9 @@ export const authReducer = createReducer(authState, (builder) => {
     state.loading = true
   }).addCase(signoutThunk.rejected, (state) => {
     state.loading = false
+  }).addCase(updateAvatarThunk.fulfilled, (state, action) => {
+    if(!state.account) return
+    state.account = {...state.account, avatarUrl: action.payload}
   })
 })
 
