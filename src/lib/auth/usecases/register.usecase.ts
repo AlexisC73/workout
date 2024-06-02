@@ -1,5 +1,5 @@
 import { createAppAsyncThunk } from "../../create-app-thunk";
-import { Account } from "../model/account";
+import { RegisterPayload } from "../model/account.repository";
 
 export const registerThunk = createAppAsyncThunk("auth/register", async (payload: RegisterPayload, {extra: { accountRepository }}) => {
   const signedAccount = await accountRepository.register(payload)
@@ -8,5 +8,3 @@ export const registerThunk = createAppAsyncThunk("auth/register", async (payload
   }
   return signedAccount.right
 })
-
-export type RegisterPayload = Account

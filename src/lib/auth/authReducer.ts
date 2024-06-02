@@ -3,9 +3,10 @@ import { signinThunk } from "./usecases/signin.usecase";
 import { getMeThunk } from "./usecases/get-me.usecase";
 import { signoutThunk } from "./usecases/signout.usecase";
 import { RootState } from "../create-store";
+import { Account } from "./model/account";
 
 export interface AuthState {
-  account: { id: string, email: string } | null
+  account: Omit<Account, "password"> | null
   loading: boolean
 }
 
@@ -16,7 +17,7 @@ const authState: AuthState = {
 
 export const authReducer = createReducer(authState, (builder) => {
   builder.addCase(signinThunk.fulfilled, (state, action) => {
-    state.account = {email: action.payload.email, id: action.payload.id}
+    state.account = {email: action.payload.email, id: action.payload.id, avatarUrl: action.payload.avatarUrl}
     state.loading = false
   }).addCase(signinThunk.pending, (state) => {
     state.loading = true
@@ -24,7 +25,7 @@ export const authReducer = createReducer(authState, (builder) => {
     state.loading = false
     state.account = null
   }).addCase(getMeThunk.fulfilled, (state, action) => {
-    state.account = {email: action.payload.email, id: action.payload.id}
+    state.account = {email: action.payload.email, id: action.payload.id, avatarUrl: action.payload.avatarUrl}
     state.loading = false
   }).addCase(getMeThunk.pending, (state) => {
     state.loading = true

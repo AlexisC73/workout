@@ -10,7 +10,7 @@ describe("get me usecase", () => {
   })
 
   test("should add account in account repository", async () => {
-    const registeredAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").build()
+    const registeredAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").withAvatarUrl(null).build()
 
     authFixture.givenNoAccountExists()
 

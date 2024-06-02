@@ -10,11 +10,11 @@ describe("get me usecase", () => {
   })
 
   test("state account null if signout", async () => {
-    const existingAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").build()
+    const existingAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").withAvatarUrl(null).build()
 
     authFixture.givenAccountsExists([existingAccount])
 
-    authFixture.givenAccountAlreadyAuthenticatedAs({id: '1', email: "test@test.fr"})
+    authFixture.givenAccountAlreadyAuthenticatedAs({id: '1', email: "test@test.fr", avatarUrl: null})
 
     await authFixture.whenSignout()
 

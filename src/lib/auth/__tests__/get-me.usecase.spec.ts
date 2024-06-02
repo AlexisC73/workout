@@ -10,7 +10,7 @@ describe("get me usecase", () => {
   })
 
   test("should populate auth state if authenticated", async () => {
-    const existingAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").build()
+    const existingAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").withAvatarUrl("image.png").build()
 
     authFixture.givenAccountsExists([existingAccount])
 
@@ -22,6 +22,7 @@ describe("get me usecase", () => {
       account: {
         id: '1',
         email: "test@test.fr",
+        avatarUrl: "image.png"
       },
       loading: false
     })

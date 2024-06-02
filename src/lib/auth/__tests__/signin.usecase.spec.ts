@@ -10,13 +10,13 @@ describe("signin usecase", () => {
   })
   
   test("should sign in account", async () => {
-    const existingAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").build()
+    const existingAccount = accountBuilder().withId("1").withEmail("test@test.fr").withPassword("password").withAvatarUrl(null).build()
 
     authFixture.givenAccountsExists([existingAccount])
 
     await authFixture.whenSignIn({ email: "test@test.fr", password: "password" })
 
-    authFixture.thenAuthStateShouldBe({account: { id: "1", email: "test@test.fr" }, loading: false})
+    authFixture.thenAuthStateShouldBe({account: { id: "1", email: "test@test.fr", avatarUrl: null }, loading: false})
   })
 
   test("if account does not exist should not sign in", async () => {

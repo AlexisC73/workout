@@ -1,6 +1,6 @@
 import { CredentialError } from "../errors";
 import { Account } from "../model/account";
-import { AccountRepository } from "../model/account.repository";
+import { AccountRepository, RegisterPayload } from "../model/account.repository";
 import * as E from "fp-ts/Either";
 
 export class InMemoryAccountRepository implements AccountRepository {
@@ -12,16 +12,16 @@ export class InMemoryAccountRepository implements AccountRepository {
     if(!account) {
       return E.left(new CredentialError("invalid credentials"))
     }
-    this.authenticatedAccount = {id: account.id, email: account.email}
+    this.authenticatedAccount = {id: account.id, email: account.email, avatarUrl: account.avatarUrl}
     localStorage.setItem("authenticatedAccount", JSON.stringify(this.authenticatedAccount))
-    return E.right({ id: account.id, email: account.email })
+    return E.right({ id: account.id, email: account.email, avatarUrl: account.avatarUrl })
   }
 
   async getMe() {
     if(!this.authenticatedAccount) {
       return E.left(new CredentialError("unauthenticated"))
     }
-    return E.right({ id: this.authenticatedAccount.id, email: this.authenticatedAccount.email })
+    return E.right({ id: this.authenticatedAccount.id, email: this.authenticatedAccount.email, avatarUrl: this.authenticatedAccount.avatarUrl })
   }
 
   async signout() {
@@ -33,14 +33,14 @@ export class InMemoryAccountRepository implements AccountRepository {
     return E.right(undefined)
   }
 
-  async register(payload: Account) {
+  async register(payload: RegisterPayload) {
     if(this.authenticatedAccount) {
       return E.left(new CredentialError("already authenticated"))
     }
     if(this.accounts.find(account => account.email === payload.email)) {
       return E.left(new CredentialError("email already exists"))
     }
-    this.accounts = [...this.accounts, payload]
+    this.accounts = [...this.accounts, {...payload, avatarUrl: null}]
     localStorage.setItem("users", JSON.stringify(this.accounts))
     return E.right(undefined)
   }
