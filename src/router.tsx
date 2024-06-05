@@ -11,6 +11,7 @@ import ForgotPasswordPage from "./pages/auth/forgot-password"
 import TrainingSessionPage from "./pages/training/training-session/training-session"
 import ProfilePage from "./pages/account/profile"
 import { InMemoryAvatarRepository } from "./lib/account/infra/in-memory-avatar.repository"
+import ExercicesPage from "./pages/exercices/exercises-page"
 
 const accountRepository = new InMemoryAccountRepository()
 const avatarRepository = new InMemoryAvatarRepository()
@@ -57,6 +58,9 @@ export const createRouter = () => {
         path: "/account/profile",
         element: <RequireAuth page={<ProfilePage />} />
       }]
+    }, {
+      path: "exercises",
+      element: <RequireAuth page={<ExercicesPage />} />
     }]
   }])
 }

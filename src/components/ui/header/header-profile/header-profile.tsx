@@ -3,11 +3,12 @@ import Button from "../../button/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store-hook";
 import { getAuthUser } from "@/lib/auth/authReducer";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { AccountIcon, SettingIcon } from "@/assets/icons";
 import LogoutButton from "../../button/auth/logout-button";
 import Separator from "../../separator/separator";
 import Avatar from "../../account/avatar";
+import DropdownMenu from "../../dropdown/dropdown";
+import DropdownMenuItem from "../../dropdown/item/DropdownMenuItem";
 
 export default function HeaderProfile() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -28,7 +29,6 @@ export default function HeaderProfile() {
           <div className="w-20">
             <Avatar />
           </div>
-          
           <p>{auth?.email}</p>
         </div>
         <Button type="button" onCickAction={handleLogout}>Me déconnecter</Button>
@@ -40,21 +40,21 @@ export default function HeaderProfile() {
           </div>
         </div>
         {menuOpen && (
-          <div className="absolute top-11 flex flex-col shadow right-0 bg-white border p-2 w-60 rounded-1">
-            <ul className="flex flex-col gap-y-2 pb-2">
-              <MenuItem to="/account/profile">
+          <div className="absolute top-11 flex flex-col w-60">
+            <DropdownMenu>
+              <DropdownMenuItem type="link" to="/account/profile">
                 <AccountIcon className="text-5" />
                 <span>Mon compte</span>
-              </MenuItem>
-              <MenuItem to="/settings">
+              </DropdownMenuItem>
+              <DropdownMenuItem type="link" to="/settings">
                 <SettingIcon className="text-5" />
                 <span>Paramètres</span>
-              </MenuItem>
-            </ul>
-            <Separator />
-            <div className="mt-2">
-              <LogoutButton />
-            </div>
+              </DropdownMenuItem>
+              <Separator />
+              <div>
+                <LogoutButton />
+              </div>
+            </DropdownMenu>
           </div>
         )}
       </div>
@@ -62,12 +62,3 @@ export default function HeaderProfile() {
   )
 }
 
-function MenuItem ({children, to}: {children?: React.ReactNode, to: string}) {
-  return (
-    <li>
-      <Link to={to} className="flex items-center p-2 w-full gap-x-2 text-3.5 hover:bg-gray-1 rounded-1 font-medium">
-        {children}
-      </Link>
-    </li>
-  )
-}
